@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bee0uefg24alx"]
+
+[ext_resource type="PackedScene" uid="uid://cphy4yby3m0cu" path="res://kiwi_bird_skele_working_2.tscn" id="1_734ff"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1nmo"]
+size = Vector3(13.1318, 1, 14.6123)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0p5wn"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.99928, 0, -0.0379518, 0, 1, 0, 0.0379518, 0, -0.99928, -0.0321846, 1.97622, -5.46144)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0155849, -0.293703, 0.0116811)
+shape = SubResource("BoxShape3D_i1nmo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(6.66073, 0, 0, 0, 0.998804, 0, 0, 0, 7.44503, 0, 0, 0)
+mesh = SubResource("PlaneMesh_0p5wn")
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("1_734ff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2295, 0.206298, 2.51473)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D2"]
+transform = Transform3D(0.985508, -0.110653, 0.128568, 0.0299803, 0.859629, 0.510038, -0.166958, -0.498792, 0.850489, 0.150343, 2.9275, 7.57778)
