@@ -88,9 +88,6 @@ func _on_egg_collected(egg_scene: Node3D):
 		call_deferred("_add_following_egg", egg_scene)
 	else:
 		egg_scene.get_parent().call_deferred("remove_child", egg_scene)
-		
-		# Defer adding the egg to the Kiwi so it doesn’t interfere with physics updates
-		
 
 # Function to add the egg safely after the physics update
 func _add_following_egg(egg_scene: Node3D):
