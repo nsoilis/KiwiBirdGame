@@ -845,4 +845,4 @@ transform = Transform3D(0.92, 0, 0, 0, 0.92, 0, 0, 0, 0.548398, -0.00489092, 1.1
 shape = SubResource("BoxShape3D_a6ujb")
 
 [node name="EggMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.457342, 0.792187)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.457342, 0.224936)

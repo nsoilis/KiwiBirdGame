@@ -120,7 +120,7 @@ func _update_following_eggs(delta: float):
 			continue
 
 		# Calculate the target position for this egg
-		var target_offset = egg_follow_point.global_transform.basis.z * 1 * (i + 1)
+		var target_offset = egg_follow_point.global_transform.basis.z * 1.2 * (i + 1)
 		var target_position = egg_follow_point.global_transform.origin + target_offset
 		egg.global_position = egg.global_position.lerp(target_position, 5 * delta)
 
