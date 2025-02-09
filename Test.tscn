@@ -29,9 +29,6 @@ mesh = SubResource("PlaneMesh_0p5wn")
 [node name="CharacterBody3D2" parent="." instance=ExtResource("1_734ff")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2295, 0.206298, 2.51473)
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.944949, 0.327218, 0, -0.327218, 0.944949, -0.47489, 4.2535, 4.41343)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="EggCounterLabel" type="Label" parent="CanvasLayer"]
@@ -54,3 +51,9 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 6.69421, 1.03149, -6
 
 [node name="EggScene3" parent="Egg Container" instance=ExtResource("2_410ek")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1.73007, 1.03149, -7.10522)
+
+[node name="EggScene4" parent="Egg Container" instance=ExtResource("2_410ek")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 5.17239, 1.03149, -12.4864)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.784094, 0.620642, 0, -0.620642, 0.784094, 2.75461, 6.80257, 9.01491)

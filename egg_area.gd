@@ -9,9 +9,11 @@ func _ready():
 
 # Trigger when something enters the egg's area
 func _on_body_entered(body):
-	if body is CharacterBody3D:  # Adjust to match your player node's type
-		emit_signal("egg_collected")  # Notify the game about the collection
-		self.get_parent().queue_free()  # Remove the egg instance
+	if body is CharacterBody3D:
+		print("Egg collected!")
+		body._on_egg_collected(self.get_parent())  # Pass the full egg scene to the player
+		call_deferred("queue_free")  # Defer deletion so it's safe
+
 
 func _on_egg_collected():
 	get_node("CharacterBody3D").collect_egg()
