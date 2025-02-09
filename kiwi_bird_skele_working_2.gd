@@ -4,8 +4,19 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const TURN_SPEED = 5.0  # Adjust this to control how quickly the Kiwi turns
 
+signal egg_collected_signal(egg_count)
+
+var egg_count: int = 0  # Keep track of collected eggs
 @onready var animation_player: AnimationPlayer = $KiwiBirdSkeleWorking2/AnimationPlayer
 
+func _ready():
+	# Loop through all nodes in the "eggs" group
+	for egg in get_tree().get_nodes_in_group("eggs"):
+		# Connect the signal if the node has the signal
+		if egg.has_signal("egg_collected"):
+			egg.connect("egg_collected", Callable(self, "_on_egg_collected"))
+			
+			
 func _physics_process(delta: float) -> void:
 	# Add gravity
 	if not is_on_floor():
@@ -40,3 +51,9 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("IdleAnimationUpdate")
 
 	move_and_slide()
+		
+func _on_egg_collected():
+	egg_count += 1
+	print("Eggs collected: %d" % egg_count)
+	emit_signal("egg_collected_signal", egg_count)  # Notify the main scene
+	
