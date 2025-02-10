@@ -81,10 +81,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_egg_collected(egg_scene: Node3D):
 	egg_count += 1  # Update the inventory count
-	total_egg_count += 1  # Increment the total eggs collected
-	print("Eggs collected! Inventory:", egg_count, "Total:", total_egg_count)
+	print("Eggs collected! Inventory:", egg_count)
 
-	# Emit signal with updated counts
+	# Emit signal with updated counts (only updating inventory here)
 	emit_signal("egg_collected_signal", egg_count, total_egg_count)
 
 	# Add the egg to the following list if there's room
@@ -94,7 +93,6 @@ func _on_egg_collected(egg_scene: Node3D):
 	else:
 		egg_scene.get_parent().call_deferred("remove_child", egg_scene)
 		egg_scene.queue_free()
-
 
 
 func _add_following_egg(egg_scene: Node3D):
@@ -129,27 +127,82 @@ func _update_following_eggs(delta: float):
 		# Smoothly move the egg toward its target position
 		egg.global_position = egg.global_position.lerp(target_position, 5 * delta)
 		
-func _deposit_eggs():
+func deposit_eggs():
 	if egg_count == 0:
 		print("No eggs to deposit!")
 		return  # Nothing to deposit
 
-	var nest = get_tree().get_first_node_in_group("nest")  # Find Nest
+	var nest = get_tree().get_first_node_in_group("nest")  # Find the Nest
 	if not nest:
 		print("Nest not found!")
 		return
 
 	print("Depositing", egg_count, "eggs into the nest!")
 
-	# Move all eggs to the nest
-	while not following_eggs.is_empty():
-		var egg = following_eggs.pop_front()  # Take the first egg
-		egg.get_parent().call_deferred("remove_child", egg)  # Remove from Kiwi
-		nest.call_deferred("add_child", egg)  # Add to the Nest
-		egg.global_position = nest.global_transform.origin + Vector3(0, 0.5, 0)  # Position it in the Nest
+	var nest_area_size = 3.0  # Increase area so eggs have more room
+	var min_spacing = 1.2  # Increase spacing so eggs are further apart
+
+	# Ensure we deposit all eggs, even if they aren't trailing
+	for i in range(egg_count):
+		var egg
+
+		# Use following eggs first
+		if following_eggs.size() > 0:
+			egg = following_eggs.pop_front()  # Remove an egg from the list
+			egg.get_parent().call_deferred("remove_child", egg)  # Remove from Kiwi
+		else:
+			# Spawn a new egg since it's in the inventory but not following
+			egg = preload("res://Egg.tscn").instantiate()
+			egg.scale = Vector3(0.5, 0.5, 0.5)  # Set new eggs to 50% size
+
+		# Add the egg to the nest
+		nest.call_deferred("add_child", egg)
+		await get_tree().process_frame  # Ensure it's added before setting position
+
+		# Prevent deposited eggs from being picked up again
+		egg.remove_from_group("eggs") 
+		
+		# Disable `EggArea` so it no longer detects collisions
+		var egg_area = egg.get_node_or_null("EggArea")  # Find the `EggArea` inside the egg
+		if egg_area:
+			egg_area.set_deferred("monitoring", false)  # Turn off area collision detection
+
+
+		# Try random positions until we find one that doesn't overlap
+		var random_x
+		var random_z
+		var valid_position = false
+		var max_attempts = 10  # Prevent infinite loop
+		var attempt = 0
+
+		while not valid_position and attempt < max_attempts:
+			random_x = randf_range(-nest_area_size, nest_area_size)
+			random_z = randf_range(-nest_area_size, nest_area_size)
+			valid_position = true
+
+			# Check if this position is too close to another egg
+			for other_egg in nest.get_children():
+				if egg != other_egg and egg.global_position.distance_to(other_egg.global_position) < min_spacing:
+					valid_position = false
+					break  # Stop checking, try again
+
+			attempt += 1  # Increase attempt count
+
+		if attempt >= max_attempts:
+			print("Warning: Could not find a perfect position, placing egg anyway!")
+
+		# Apply the non-overlapping position
+		var nest_position = nest.global_transform.origin  # Get nest's global position
+		egg.global_position = nest_position + Vector3(random_x, 0.5, random_z)
+
+		print("Egg added at position:", egg.global_position)
+
+	# Update total eggs collected
+	total_egg_count += egg_count
 
 	# Reset inventory
 	egg_count = 0
 	emit_signal("egg_collected_signal", egg_count, total_egg_count)
+	
 
 	print("All eggs deposited into the nest!")

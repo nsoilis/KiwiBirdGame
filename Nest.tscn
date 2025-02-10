@@ -28,5 +28,5 @@ shape = SubResource("CylinderShape3D_1qyef")
 script = ExtResource("1_oic2k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DropZone"]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0.582332, 0)
+transform = Transform3D(7, 0, 0, 0, 0.5, 0, 0, 0, 7, 0, 0.582332, 0)
 shape = SubResource("CylinderShape3D_6wrsb")

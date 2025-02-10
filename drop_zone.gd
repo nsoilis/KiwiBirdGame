@@ -8,7 +8,7 @@ func _ready():
 func _on_body_entered(body):
 	if body is CharacterBody3D:
 		print("Kiwi entered DropZone!")
-		body._deposit_eggs()  # Directly tell the Kiwi to deposit eggs
+		body.deposit_eggs()  # Directly tell the Kiwi to deposit eggs
 
 	if body == null:
 		print("Error: Null object entered the nest.")

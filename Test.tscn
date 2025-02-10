@@ -56,6 +56,24 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1.73007, 1.03149, -7
 [node name="EggScene4" parent="Egg Container" instance=ExtResource("2_410ek")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 5.17239, 1.03149, -12.4864)
 
+[node name="EggScene5" parent="Egg Container" instance=ExtResource("2_410ek")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.664983, 1.03149, -17.327)
+
+[node name="EggScene6" parent="Egg Container" instance=ExtResource("2_410ek")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -4.0485, 1.03149, -13.4978)
+
+[node name="EggScene7" parent="Egg Container" instance=ExtResource("2_410ek")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -2.87662, 1.03149, -18.2303)
+
+[node name="EggScene8" parent="Egg Container" instance=ExtResource("2_410ek")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -3.34286, 1.03149, -6.54506)
+
+[node name="EggScene9" parent="Egg Container" instance=ExtResource("2_410ek")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.569618, 1.03149, -12.2933)
+
+[node name="EggScene10" parent="Egg Container" instance=ExtResource("2_410ek")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -2.22942, 1.03149, -1.85118)
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.784094, 0.620642, 0, -0.620642, 0.784094, 2.75461, 9.41676, 9.01491)
 
