@@ -14,7 +14,6 @@ func _on_body_entered(body):
 		body._on_egg_collected(self.get_parent())  # Pass the full egg scene to the player
 		call_deferred("queue_free")  # Defer deletion so it's safe
 
-
 func _on_egg_collected():
 	get_node("CharacterBody3D").collect_egg()
 	
