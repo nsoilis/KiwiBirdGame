@@ -16,6 +16,17 @@ const MAX_FOLLOWING_EGGS = 3  # Maximum eggs that can follow
 @onready var egg_follow_point: Marker3D = $EggMarker
 
 func _ready():
+	var drop_zone = get_tree().get_first_node_in_group("nest")  # DropZone is in "nest" group
+	if drop_zone:
+		if drop_zone.has_signal("kiwi_in_nest"):
+			drop_zone.connect("kiwi_in_nest", Callable(self, "_deposit_eggs"))
+			print("Kiwi successfully connected to DropZone!")
+		else:
+			print("Error: DropZone is missing 'kiwi_in_nest' signal!")
+	else:
+		print("Error: DropZone not found in the scene!")
+
+	
 	egg_count = 0  # Replace with saved value if loading
 	total_egg_count = 0  # Replace with saved value if loading
 	# Connect to all eggs in the scene
@@ -117,3 +128,28 @@ func _update_following_eggs(delta: float):
 
 		# Smoothly move the egg toward its target position
 		egg.global_position = egg.global_position.lerp(target_position, 5 * delta)
+		
+func _deposit_eggs():
+	if egg_count == 0:
+		print("No eggs to deposit!")
+		return  # Nothing to deposit
+
+	var nest = get_tree().get_first_node_in_group("nest")  # Find Nest
+	if not nest:
+		print("Nest not found!")
+		return
+
+	print("Depositing", egg_count, "eggs into the nest!")
+
+	# Move all eggs to the nest
+	while not following_eggs.is_empty():
+		var egg = following_eggs.pop_front()  # Take the first egg
+		egg.get_parent().call_deferred("remove_child", egg)  # Remove from Kiwi
+		nest.call_deferred("add_child", egg)  # Add to the Nest
+		egg.global_position = nest.global_transform.origin + Vector3(0, 0.5, 0)  # Position it in the Nest
+
+	# Reset inventory
+	egg_count = 0
+	emit_signal("egg_collected_signal", egg_count, total_egg_count)
+
+	print("All eggs deposited into the nest!")

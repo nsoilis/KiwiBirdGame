@@ -719,7 +719,7 @@ size = Vector3(1.85132, 2.48547, 3.95996)
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_nt43r")
 
-[node name="KiwiBirdSkeleWorking2" type="Node3D" parent="."]
+[node name="KiwiBirdSkeleWorking2" type="Node3D" parent="." groups=["kiwi"]]
 
 [node name="Armature" type="Node3D" parent="KiwiBirdSkeleWorking2"]
 transform = Transform3D(0.498059, 0, 0, 0, 0.498059, 0, 0, 0, 0.498059, -0.0197882, -0.0295092, -0.284419)
