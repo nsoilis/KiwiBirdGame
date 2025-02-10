@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bb7labbqujjvw"]
+
+[ext_resource type="Script" path="res://nest.gd" id="1_bigff"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r7h4r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ak3u"]
+albedo_color = Color(0.269621, 0.144679, 0.0420141, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1qyef"]
+height = 0.564427
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6wrsb"]
+
+[node name="Nest" type="StaticBody3D"]
+script = ExtResource("1_bigff")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 0.0284898, 0, 0, 0, 10, 0.00666189, 0.0170532, 0.000377893)
+mesh = SubResource("CylinderMesh_r7h4r")
+skeleton = NodePath("../CollisionShape3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_2ak3u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 0.306, 0, 0, 0, 10, 0.00666189, 0.100201, 0.000377893)
+shape = SubResource("CylinderShape3D_1qyef")
+
+[node name="DropZone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropZone"]
+transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0.582332, 0)
+shape = SubResource("CylinderShape3D_6wrsb")

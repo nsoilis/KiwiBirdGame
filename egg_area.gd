@@ -1,7 +1,5 @@
 extends Area3D  # `EggArea` is still an `Area3D` type under the hood
 
-# Signal to notify when the egg is collected
-signal egg_collected
 
 func _ready():
 	# Connect the `body_entered` signal to detect when the player enters the area

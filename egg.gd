@@ -1,5 +1,6 @@
 extends Node3D
 
+var is_egg: bool = true
 var is_on_floor: bool = true  # Tracks if the egg is on the ground
 
 func check_if_on_floor() -> void:
@@ -9,5 +10,5 @@ func check_if_on_floor() -> void:
 	else:
 		is_on_floor = false
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:  # Suppress unused parameter warning
 	check_if_on_floor()

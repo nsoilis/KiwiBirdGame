@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bee0uefg24alx"]
+[gd_scene load_steps=7 format=3 uid="uid://bee0uefg24alx"]
 
 [ext_resource type="PackedScene" uid="uid://cphy4yby3m0cu" path="res://kiwi_bird_skele_working_2.tscn" id="1_734ff"]
 [ext_resource type="Script" path="res://test.gd" id="1_iixur"]
 [ext_resource type="PackedScene" uid="uid://dgmgrsmcanddh" path="res://egg.tscn" id="2_410ek"]
+[ext_resource type="PackedScene" uid="uid://bb7labbqujjvw" path="res://Nest.tscn" id="4_5di4r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i1nmo"]
 size = Vector3(13.1318, 1, 14.6123)
@@ -34,10 +35,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2295, 0.206298, 2.51473)
 [node name="EggCounterLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 844.0
+offset_left = 804.0
 offset_top = 20.0
 offset_right = -20.0
-offset_bottom = 73.0
+offset_bottom = 112.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
 
@@ -57,3 +58,6 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 5.17239, 1.03149, -1
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.784094, 0.620642, 0, -0.620642, 0.784094, 2.75461, 9.41676, 9.01491)
+
+[node name="Nest" parent="." instance=ExtResource("4_5di4r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6961, 1.57621, -1.51036)
