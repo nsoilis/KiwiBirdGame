@@ -154,6 +154,9 @@ func deposit_eggs():
 			# Spawn a new egg since it's in the inventory but not following
 			egg = preload("res://Egg.tscn").instantiate()
 			egg.scale = Vector3(0.5, 0.5, 0.5)  # Set new eggs to 50% size
+			var anim_player = egg.get_node_or_null("AnimationPlayer")
+			if anim_player:
+				anim_player.play("BounceAnimation")
 
 		# Add the egg to the nest
 		nest.call_deferred("add_child", egg)
